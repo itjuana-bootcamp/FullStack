@@ -1,0 +1,46 @@
+@import "./constant.css";
+
+.blog-post-navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--white);
+}
+
+.blog-post-navbar > ul {
+  list-style-type: none;
+}
+
+.blog-post-navbar a {
+  text-decoration: none;
+}
+
+.blog-post-navbar a:hover {
+  color: var(--blue);
+}
+
+.blog-post-feature {
+  display: flex;
+  flex-direction: row;
+}
+
+.blog-post-details {
+  padding-left: 34px;
+  padding-right: 34px;
+}
+
+.blog-post-details > a {
+  text-decoration: none;
+}
+
+.blog-post-details > a:hover {
+  color: var(--blue);
+}
+
+.blog-post {
+  display: flex;
+  flex-direction: row;
+  margin: 10%;
+}
