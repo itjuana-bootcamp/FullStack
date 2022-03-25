@@ -1,0 +1,52 @@
+@import "./constants.css";
+
+.post-back-header {
+  margin-top: 62px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+
+.post-back-header a {
+  font-weight: 700;
+  color: var(--green-medium-color);
+  text-decoration: none;
+}
+
+.post-back-header img {
+  vertical-align: middle;
+}
+
+.post-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+
+.post-details {
+  margin-right: 58px;
+  max-width: 60%;
+}
+
+.post-details p {
+  color: var(--oxford-color-gray);
+}
+
+.post-image {
+  margin-top: 62px;
+  max-width: 40%;
+}
+
+.post-coment {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-coment button {
+  margin-top: 12px;
+  color: var(--white-color);
+  background-color: var(--green-medium-color);
+  border: none;
+}
