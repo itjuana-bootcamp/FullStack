@@ -1,20 +1,25 @@
 import React from "react";
 import "../blog.css";
 
-const Post = ({post}) => {
+const Post = ({post, onEdit}) => {
  return (
    <div className="blog-post">
      <div className="blog-post-image">
-      <img src={post.image} alt="img"
+      <img src={post.imageUrl} alt="img"
       width="250" height = "250"
       />
      </div>
      <div className="blog-post-details">
         <p>{post.updatedAt}</p>
         <h1>{post.title}</h1>
-        <p>{post.content}</p>
+        <p>{post.body}</p>
         <a href={post.blogLink}>READ MORE</a>
      </div>
+     <button
+      style={{ height: 40, borderRadius: 6, backgroundColor: 'yellowgreen' }}
+      onClick={() => onEdit()}>
+       Edit
+     </button>
    </div>
  )
 }
