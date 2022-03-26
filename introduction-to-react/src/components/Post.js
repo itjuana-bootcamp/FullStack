@@ -16,7 +16,7 @@ const Post = ({post, onEdit}) => {
         <a href={post.blogLink}>READ MORE</a>
      </div>
      <button
-      style={{ height: 40, borderRadius: 6, backgroundColor: 'yellowgreen' }}
+      className="blog-post-edit"
       onClick={() => onEdit()}>
        Edit
      </button>

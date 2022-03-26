@@ -92,3 +92,9 @@
 .blog-post-details p {
   color: var(--oxford-color-gray);
 }
+
+.blog-post-edit {
+  background-color: transparent;
+  border: 0;
+  color: var(--green-medium-color);
+}
