@@ -1,7 +1,8 @@
 import React, { useState } from "react"
+import {Link} from 'react-router-dom'
 import "../forms.css"
 
-const CreatePost = ({ onPress, onSave, post }) => {
+const CreatePost = ({ onSave, post }) => {
 
   const defaultNewPost = {
     title: '',
@@ -69,11 +70,11 @@ const CreatePost = ({ onPress, onSave, post }) => {
         </div>
 
         <div className="buttons-container">
-          <button
-            type="button"
-            onClick={() => onPress()}>
+          <Link
+            to="/"
+          >
             Cancel
-          </button>
+          </Link>
           <button
             type="button"
             disabled={newPost.title === '' || newPost.body === ''}

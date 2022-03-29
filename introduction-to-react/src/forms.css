@@ -51,7 +51,7 @@
   margin: 16px;
 }
 
-.buttons-container button {
+.buttons-container button, .buttons-container a {
     height: 40px;
     width: 140px;
     padding: 10px;
@@ -62,8 +62,12 @@
     border-width: 0px;
     margin-left: 16px;
     opacity: .85;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.buttons-container button:hover {
+.buttons-container button:hover, .buttons-container a:hover {
   opacity: 1;
 }

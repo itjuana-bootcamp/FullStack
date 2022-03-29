@@ -1,28 +1,33 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../blog.css";
 
-const NavBar = ({ onPress }) => {
-
+const NavBar = () => {
   return (
     <div className="blog-post-navbar">
       <div className="blog-post-brand">
-        <a href="https://itjuana.com/">
+        <Link to="/">
           <img
             src="https://itjuana.com/wp-content/themes/itjuana/assets/images/svg-grid/itijuana-logo-color.svg"
-            alt="" width="100" height="50" />
-        </a>
+            alt=""
+            width="100"
+            height="50"
+          />
+        </Link>
       </div>
       <ul>
-        <li className="blog-post-navbar">Join our team</li>
-        <li className="blog-post-navbar">Contact us</li>
-        <button
-          onClick={() => onPress()}
-          className="blog-post-navbar">
+        <li className="blog-post-navbar">
+          <Link to="/join-our-team">Join our team</Link>
+        </li>
+        <li className="blog-post-navbar">
+          <Link to="/contact-us">Contact us</Link>
+        </li>
+        <Link to="create-post" className="blog-post-navbar">
           Create New Post
-        </button>
+        </Link>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
