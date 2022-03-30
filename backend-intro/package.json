@@ -1,0 +1,32 @@
+{
+  "name": "awesome-project",
+  "version": "1.0.0",
+  "description": "This is an awesome project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itjuana-bootcamp/FullStack.git"
+  },
+  "keywords": [
+    "Awesome",
+    "Project"
+  ],
+  "author": "Angel Resendiz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itjuana-bootcamp/FullStack/issues"
+  },
+  "homepage": "https://github.com/itjuana-bootcamp/FullStack#readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node hello.js",
+    "dev": "nodemon hello.js",
+    "sayBye": "node bye.js"
+  },
+  "dependencies": {
+    "dog-names": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

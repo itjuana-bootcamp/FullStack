@@ -1,0 +1,32 @@
+{
+  "name": "fullstack-backend",
+  "version": "1.0.0",
+  "description": "Backend for the iTjuana fullstack bootcamp",
+  "main": "index.js",
+  "scripts": {
+    "demo": "nodemon test-api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itjuana-bootcamp/FullStack.git"
+  },
+  "keywords": [
+    "iTjuana",
+    "bootcamp",
+    "fullstack",
+    "javascript",
+    "node"
+  ],
+  "author": "iTjuana Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itjuana-bootcamp/FullStack/issues"
+  },
+  "homepage": "https://github.com/itjuana-bootcamp/FullStack#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
