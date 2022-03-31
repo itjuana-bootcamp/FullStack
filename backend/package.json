@@ -4,7 +4,8 @@
   "description": "Backend for the iTjuana fullstack bootcamp",
   "main": "index.js",
   "scripts": {
-    "demo": "nodemon test-api.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",
