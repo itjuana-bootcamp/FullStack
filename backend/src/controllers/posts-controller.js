@@ -1,75 +1,68 @@
-let posts = [
-  {
-    _id: "1",
-    title: "My first post",
-    body: "My frist post body",
-    imageUrl:
-      "https://assets.afcdn.com/story/20130522/31922_w767h767c1cx298cy375.jpg",
-    author: "Mike",
-    comments: [],
-    cretedAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
+const postsService = require("../services/posts-service");
 
-const listPosts = (req, res) => {
-  res.setHeader("Total", posts.length);
-  res.json(posts);
-};
-
-const getPost = (req, res) => {
-  const { id } = req.params;
-
-  const post = posts.find((post) => post._id === id);
-
-  if (post) {
-    res.json(post);
-  } else {
-    res.status(404).send();
+const listPosts = async (req, res) => {
+  try {
+    const posts = await postsService.listPosts();
+    res.setHeader("Total", posts.length);
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Error" });
   }
 };
 
-const savePost = (req, res) => {
+const savePost = async (req, res, next) => {
   const post = req.body;
-
-  post._id = `${posts.length + 1}`;
-  posts.push(post);
-
-  res.status(201).json(post);
+  try {
+    const savedPost = await postsService.savePost(post);
+    res.status(201).json(savedPost);
+  } catch (error) {
+    next(error);
+  }
 };
 
-const updatePost = (req, res) => {
+const getPost = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const post = await postsService.getPost(id);
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.json(post);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updatePost = async (req, res, next) => {
   const { id } = req.params;
   const newPostInfo = req.body;
 
-  const postIndex = posts.findIndex((post) => post._id === id);
+  try {
+    const updatedPost = await postsService.updatePost(id, newPostInfo);
 
-  if (postIndex === -1) {
-    return res.status(404).send();
+    if (!updatedPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.json(updatedPost);
+  } catch (error) {
+    next(error);
   }
-
-  const updatedPost = {
-    ...posts[postIndex],
-    ...newPostInfo,
-    updatedAt: new Date(),
-  };
-  posts[postIndex] = updatedPost;
-
-  res.json(updatedPost);
 };
 
-const deletePost = (req, res) => {
+const deletePost = async (req, res, next) => {
   const { id } = req.params;
 
-  const postIndex = posts.findIndex((post) => post._id === id);
-
-  if (postIndex === -1) {
-    return res.status(404).send();
+  try {
+    await postsService.deletePost(id);
+    res.status(204).send();
+  } catch (error) {
+    next(error);
   }
-
-  posts.splice(postIndex, 1);
-
-  res.status(204).send();
 };
 
 module.exports = {
