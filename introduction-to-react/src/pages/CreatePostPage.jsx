@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom'
 import CreatePost from '../components/CreatePost';
 
-const CreatePostPage = ({post, onSave}) => {
+import { getPost } from "../api/postsApi";
+
+const CreatePostPage = ({ onSave }) => {
+  const params = useParams()
+  const { postId } = params
+  
+  const [post, setPost] = useState()
+
+  useEffect(() => {
+    getPostWId(postId)
+  }, [postId])
+
+  const getPostWId = async id => {
+    const post = await getPost(id)
+    if (post)
+      setPost(post)
+  }
+
   return (
     <CreatePost
       post={post}

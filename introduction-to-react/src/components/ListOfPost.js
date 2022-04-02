@@ -1,16 +1,16 @@
 import React from "react";
 import Post from "./Post";
 
-const ListOfPost = ({ posts, onEdit }) => {
+const ListOfPost = ({ posts, onDelete }) => {
   return (
     <>
-      {posts.map((post, index) => {
+      {posts.map(post => {
         return (
           <Post
             key={post.updatedAt + post.title}
             post={post}
-            onEdit={() => onEdit(index)}
-            postId={index}
+            postId={post._id}
+            onDelete={onDelete}
           />
         );
       })}

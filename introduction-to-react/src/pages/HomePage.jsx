@@ -2,7 +2,7 @@ import React from "react";
 import FeaturedPost from "../components/FeaturedPost";
 import ListOfPost from "../components/ListOfPost";
 
-const HomePage = ({ allPosts, handleOnEdit }) => {
+const HomePage = ({ allPosts, onDelete }) => {
   return (
     <>
       <FeaturedPost
@@ -17,7 +17,7 @@ const HomePage = ({ allPosts, handleOnEdit }) => {
           "https://itjuana.com/wp-content/uploads/2021/05/IoMT-The-Health-Revolution-image.png"
         }
       />
-      <ListOfPost posts={allPosts} onEdit={handleOnEdit} />
+      <ListOfPost posts={allPosts} onDelete={onDelete}/>
     </>
   );
 };

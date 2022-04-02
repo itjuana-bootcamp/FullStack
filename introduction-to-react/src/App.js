@@ -1,58 +1,80 @@
-import React, { useState } from "react";
-import NavBar from "./components/NavBar";
-import getAllPosts from "./resources/posts";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+
 import ContactUsPage from "./pages/ContactUsPage";
-import JoinOurTeamPage from "./pages/JoinOurTeamPage";
 import CreatePostPage from "./pages/CreatePostPage";
-import NotFoundPage from './pages/NotFoundPage';
 import DetailPostPage from './pages/DetailPostPage';
+import HomePage from "./pages/HomePage";
+import JoinOurTeamPage from "./pages/JoinOurTeamPage";
+import NavBar from "./components/NavBar";
+import NotFoundPage from './pages/NotFoundPage';
+
+import { getPosts, savePost, updatePost, deletePost } from './api/postsApi';
 
 function App() {
-  const [isCreateVisible, setIsCreateVisible] = useState(false);
-  const [allPosts, setAllPosts] = useState(getAllPosts());
-  const [postId, setPostId] = useState();
-
+  const [allPosts, setAllPosts] = useState([]);
   const navigate = useNavigate();
 
-  const handleOnSave = (post) => {
-    if (!postId) setAllPosts([...allPosts, post]);
-    else {
+  useEffect(() => {
+    getAllPosts()
+  }, [])
+
+  const getAllPosts = async () => {
+    const posts = await getPosts()
+    setAllPosts(posts)
+  }
+
+  const handleOnSave = async post => {
+    const savedPost = await savePost(post);
+    if (savedPost)
+      setAllPosts([...allPosts, savedPost]);
+    navigate("/", {replace: true});
+  };
+
+  const handleOnEdit = async (postId, post) => {
+    const editedPost = await updatePost(postId, post)
+    if (editedPost) {
       const copyOfPosts = Array.from(allPosts);
-      const result = copyOfPosts.filter((post, index) => index !== postId);
-      setAllPosts([...result, post]);
-      setPostId();
+      const result = copyOfPosts.filter(post => post._id !== postId)
+      setAllPosts([...result, editedPost]);
     }
     navigate("/", {replace: true});
   };
 
-  
-  const handleOnEdit = (postId) => {
-    setIsCreateVisible(true);
-    setPostId(postId);
-  };
-  
-  const getPostById = (postId) => allPosts[postId]
+  const handleOnDelete = async id => {
+    const isDeleted = await deletePost(id)
+    if (isDeleted) {
+      const copyOfPosts = Array.from(allPosts);
+      const result = copyOfPosts.filter(post => post._id !== id)
+      setAllPosts(result);
+    }
+  }
+
   return (
     <div className="App">
-      <NavBar onPress={() => setIsCreateVisible(true)} />
+      <NavBar />
       <Routes>
         <Route
           index
-          element={<HomePage allPosts={allPosts} handleOnEdit={handleOnEdit} />}
+          element={<HomePage allPosts={allPosts} onDelete={handleOnDelete}/>}
         />
         <Route path="contact-us" element={<ContactUsPage />} />
         <Route path="join-our-team" element={<JoinOurTeamPage />} />
         <Route
           path="create-post"
           element={
-            <CreatePostPage post={allPosts[postId]} onSave={handleOnSave} />
+            <CreatePostPage onSave={handleOnSave} />
+          }
+        />
+        <Route
+          path="create-post/:postId"
+          element={
+            <CreatePostPage onSave={handleOnEdit} />
           }
         />
         <Route 
           path="post/:postId"
-          element={<DetailPostPage onEdit={handleOnEdit} getPostById={getPostById} />}
+          element={<DetailPostPage />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

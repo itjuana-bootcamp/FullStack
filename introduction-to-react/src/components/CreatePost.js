@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {Link} from 'react-router-dom'
 import "../forms.css"
 
@@ -9,9 +9,15 @@ const CreatePost = ({ onSave, post }) => {
     body: '',
     imageUrl: '',
     updatedAt: (new Date()).toISOString(),
+    author: '',
   }
 
-  const [newPost, setNewPost] = useState(post || defaultNewPost)
+  const [newPost, setNewPost] = useState(defaultNewPost)
+
+  useEffect(() => {
+    if (post)
+      setNewPost(post)
+  }, [post])
 
   const handleOnChange = event => {
     const name = event.target.name;
@@ -69,6 +75,17 @@ const CreatePost = ({ onSave, post }) => {
           }
         </div>
 
+        <div className="input-field">
+          <label>Author</label>
+          <input
+            type="text"
+            name="author"
+            placeholder="Your name"
+            value={newPost.author}
+            onChange={handleOnChange}
+          />
+        </div>
+
         <div className="buttons-container">
           <Link
             to="/"
@@ -78,7 +95,12 @@ const CreatePost = ({ onSave, post }) => {
           <button
             type="button"
             disabled={newPost.title === '' || newPost.body === ''}
-            onClick={() => onSave(newPost)}>
+            onClick={() => {
+              if (post._id)
+                onSave(post._id, newPost)
+              else
+                onSave(newPost)
+            }}>
             Save post
           </button>
         </div>
