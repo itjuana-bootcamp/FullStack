@@ -21,9 +21,7 @@ const CreatePost = ({ onSave, post }) => {
 
   const handleOnChange = event => {
     const name = event.target.name;
-    const value = name === 'imageUrl'
-      ? URL.createObjectURL(event.target.files[0])
-      : event.target.value;
+    const value = event.target.value;
 
     setNewPost({ ...newPost, [name]: value })
   }
@@ -55,23 +53,26 @@ const CreatePost = ({ onSave, post }) => {
 
         <div className="input-field">
           <label>Add an image</label>
+          <input
+            type="text"
+            name="imageUrl"
+            placeholder="Add an image url"
+            value={newPost.imageUrl}
+            onChange={handleOnChange}
+          />
           {
-            newPost.imageUrl !== ''
-            ? <img
-                style={{
-                  maxHeight: "200px",
-                  maxWidth: "400px",
-                  alignSelf: "center",
-                  borderRadius: "8px",
-                }}
-                src={newPost.imageUrl}
-                alt="img"
-              />
-            : <input
-                type='file'
-                name="imageUrl"
-                onChange={handleOnChange}
-              />
+            newPost.imageUrl !== '' &&
+            <img
+              style={{
+                marginTop: "40px",
+                maxHeight: "200px",
+                maxWidth: "400px",
+                alignSelf: "center",
+                borderRadius: "8px",
+              }}
+              src={newPost.imageUrl}
+              alt="img"
+            />
           }
         </div>
 
