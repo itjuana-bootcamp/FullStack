@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import Post from '../components/Post'
 import { getPost } from '../api/postsApi'
 
-const DetailPostPage = () => {
+const DetailPostPage = ({ onDelete }) => {
   const params = useParams()
   const { postId } = params
 
@@ -20,7 +20,7 @@ const DetailPostPage = () => {
   }
 
   return (
-    <Post post={post} />
+    <Post post={post} postId={post._id} isDetails={ true } onDelete={onDelete}/>
   )
 }
 

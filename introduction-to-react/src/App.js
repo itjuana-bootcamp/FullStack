@@ -47,6 +47,7 @@ function App() {
       const copyOfPosts = Array.from(allPosts);
       const result = copyOfPosts.filter(post => post._id !== id)
       setAllPosts(result);
+      navigate("/", {replace: true});
     }
   }
 
@@ -56,7 +57,7 @@ function App() {
       <Routes>
         <Route
           index
-          element={<HomePage allPosts={allPosts} onDelete={handleOnDelete}/>}
+          element={<HomePage allPosts={allPosts} />}
         />
         <Route path="contact-us" element={<ContactUsPage />} />
         <Route path="join-our-team" element={<JoinOurTeamPage />} />
@@ -74,7 +75,7 @@ function App() {
         />
         <Route 
           path="post/:postId"
-          element={<DetailPostPage />}
+          element={<DetailPostPage onDelete={handleOnDelete}/>}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

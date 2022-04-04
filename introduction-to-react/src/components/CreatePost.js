@@ -17,6 +17,9 @@ const CreatePost = ({ onSave, post }) => {
   useEffect(() => {
     if (post)
       setNewPost(post)
+    else if (post && Object.keys(post).length <= 0){
+      setNewPost(defaultNewPost)
+    }
   }, [post])
 
   const handleOnChange = event => {
@@ -97,7 +100,7 @@ const CreatePost = ({ onSave, post }) => {
             type="button"
             disabled={newPost.title === '' || newPost.body === ''}
             onClick={() => {
-              if (post._id)
+              if (post?._id)
                 onSave(post._id, newPost)
               else
                 onSave(newPost)
