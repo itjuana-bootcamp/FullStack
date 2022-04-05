@@ -17,9 +17,6 @@ const CreatePost = ({ onSave, post }) => {
   useEffect(() => {
     if (post)
       setNewPost(post)
-    else if (post && Object.keys(post).length <= 0){
-      setNewPost(defaultNewPost)
-    }
   }, [post])
 
   const handleOnChange = event => {
