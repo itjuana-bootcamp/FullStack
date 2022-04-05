@@ -27,7 +27,7 @@ const Post = ({ post, postId, onDelete, isDetails }) => {
             Edit
           </Link>
           <button
-            class="blog-post-delete"
+            className="blog-post-delete"
             onClick={() => onDelete(postId)}
           >
             X

@@ -53,7 +53,7 @@ const CommentInput = ({ comment, onSave, onEdit }) => {
                             onSave(newComment)
                         setNewComment(defaultComment)
                     }}>
-                    Save comment
+                    { newComment._id ? 'Edit comment' : 'Save comment' }
                 </button>
             </div>
         </div>
