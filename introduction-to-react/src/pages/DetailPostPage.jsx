@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Comment from '../components/Comment'
@@ -16,11 +16,8 @@ const DetailPostPage = ({ onDelete }) => {
   const [postComments, setPostComments] = useState([])
   const [toEditComment, setToEditComment] = useState()
 
-  useEffect(() => {
-    getPostWithComments(postId)
-  }, [postId])
-
-  const getPostWithComments = async id => {
+  // See https://reactjs.org/docs/hooks-reference.html#usecallback for more information about this hook
+  const getPostWithComments = useCallback(async id => {
     const post = await getPost(id)
     if (post) {
       setPost(post)
@@ -28,7 +25,12 @@ const DetailPostPage = ({ onDelete }) => {
       if (comments)
         setPostComments(comments)
     }
-  }
+  }, [postId])
+
+  useEffect(() => {
+    getPostWithComments(postId)
+  }, [postId, getPostWithComments])
+
 
   const handleOnSave = async comment => {
     const savedComment = await saveComment(postId, comment)
