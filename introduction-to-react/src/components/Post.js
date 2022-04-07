@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import { format } from "date-fns";
 import "../blog.css";
 
-const Post = ({ post, postId, onDelete }) => {
-
+const Post = ({ post, postId, onDelete, isDetails }) => {
  return (
    <div className="blog-post">
      <div className="blog-post-image">
@@ -12,21 +12,28 @@ const Post = ({ post, postId, onDelete }) => {
       />
      </div>
      <div className="blog-post-details">
-        <p>{post.updatedAt}</p>
+        <p>{post.updatedAt && format(new Date(post.updatedAt), 'MMMM dd, yyyy')}</p>
         <h1>{post.title}</h1>
         <p>{post.body}</p>
-        <Link to={`post/${postId}`}>READ MORE</Link>
+        { !isDetails && <Link to={`post/${postId}`}>READ MORE</Link> }
+        
      </div>
-     <Link
-      className="blog-post-edit"
-      to={`create-post/${postId}`}>
-       Edit
-     </Link>
-     <button
-      onClick={() => onDelete(postId)}
-      style={{ border: 0, backgroundColor: 'white', fontSize: 20}}>
-      X
-     </button>
+     {
+        isDetails &&
+        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+          <Link
+            className="blog-post-edit"
+            to={`/create-post/${postId}`}>
+            Edit
+          </Link>
+          <button
+            className="blog-post-delete"
+            onClick={() => onDelete(postId)}
+          >
+            X
+          </button>
+        </div>
+     }
    </div>
  )
 }

@@ -15,9 +15,11 @@ const CreatePostPage = ({ onSave }) => {
   }, [postId])
 
   const getPostWId = async id => {
-    const post = await getPost(id)
-    if (post)
-      setPost(post)
+    if (id) {
+      const post = await getPost(id)
+      if (post)
+        setPost(post)
+    }
   }
 
   return (

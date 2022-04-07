@@ -1,0 +1,25 @@
+.comment-container {
+    margin: 20px 40px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: lightblue;
+}
+
+.date-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.options-buttons {
+    margin-right: 8px;
+    
+}
+
+.comment-input-container {
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+}
